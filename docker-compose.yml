@@ -1,24 +1,24 @@
 version: '3.4'
 
 services:
-  api:
-    image: ${DOCKER_REGISTRY-}api
+  kata.api:
+    image: ${DOCKER_REGISTRY-}kata.api
     container_name: kata.api
     build:
       context: .
-      dockerfile: api/Dockerfile
+      dockerfile: src/api/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:EmployeeDB:HostName=ms.sql.employees.db"
-      - "ConnectionStrings:EmployeeDB:Catalogue=KataDB"
+      - "ConnectionStrings:EmployeeDB:HostName=kata.db"
+      - "ConnectionStrings:EmployeeDB:Catalogue=kata"
       - "ConnectionStrings:EmployeeDB:User=sa"
       - "ConnectionStrings:EmployeeDB:Password=.123Pass456."
     ports:
       - "9010:80"
     depends_on:
-      - ms.sql.employees.db
+      - kata.db
 
-  ms.sql.employees.db:
+  kata.db:
     image: mcr.microsoft.com/mssql/server
     container_name: kata.db
     restart: always
@@ -26,6 +26,6 @@ services:
       - /c/data/docker/database:/var/opt/mssql/data
     ports:
       - "1433:1433"
-    environment:  #Parametros del comando
+    environment:
       SA_PASSWORD: ".123Pass456."
       ACCEPT_EULA: "Y"
