@@ -1,3 +1,4 @@
+### Docker
 Listar las imágenes instaladas en el equipo
 	docker image ls
 
@@ -7,3 +8,35 @@ Creación contenedor con volumen (en Windows)
 
 Despliegue de contenedores en Docker
 	docker-compose -f docker-compose.yml up -d
+
+
+
+
+### Migrations commnands in EF Core
+
+**Adding a migration**
+
+```
+PM> Add-Migration
+```
+
+- Startup project: BirthdayBot
+- Default project in PMC: Infrastructure
+
+**Create or Update the Database**
+
+```
+PM> Update-Database
+```
+
+**Remove a migration**
+
+```
+PM> Remove-Migration
+```
+
+**Deshacer último Update-Database**
+
+```
+PM> Update-Database [Migration_Name]
+```
